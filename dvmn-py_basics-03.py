@@ -8,8 +8,16 @@ server = smtplib.SMTP_SSL('smtp.yandex.com', 465)
 LOGIN = os.getenv('LOGIN')
 TOKEN = os.getenv('TOKEN')
 
-
 server.login(LOGIN, TOKEN)
+
+url = "https://dvmn.org/profession-ref-program/kurtsev.artem/3zWhU/"
+myname = "Artem"
+friendname = "Igor"
+sender = "marine-iguana@yandex.ru"
+reciever  = "marine-iguana@yandex.ru"
+subject = "Приглашение!"
+
+
 
 letter = """From: %sender%
 To: %to%
@@ -33,17 +41,12 @@ Content-Type: text/plain; charset="UTF-8";
 Регистрируйся → %website%  
 На курсы, которые еще не вышли, можно подписаться и получить уведомление о релизе сразу на имейл."""
 
-url = "https://dvmn.org/profession-ref-program/kurtsev.artem/3zWhU/"
-myname = "Artem"
-friendname = "Igor"
-sender = "marine-iguana@yandex.ru"
-reciever  = "marine-iguana@yandex.ru"
-subject = "Приглашение!"
+
 
 letter = letter.replace("%website%",url).replace("%my_name%",myname).replace("%friend_name%",friendname).replace("%sender%",sender).replace("%to%",reciever).replace("%subject%",subject)
 
 letter = letter.encode("UTF-8")
 
-server.sendmail("marine-iguana@yandex.ru", "marine-iguana@yandex.ru", letter)
+server.sendmail(sender, reciever , letter)
 server.quit()
 
